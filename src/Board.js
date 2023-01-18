@@ -27,18 +27,23 @@ import "./Board.css";
  *
  **/
 
-function Board({ nrows, ncols, chanceLightStartsOn }) {
+function Board({ nrows = 5, ncols = 5, chanceLightStartsOn = .5 }) {
   const [board, setBoard] = useState(createBoard());
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
-    let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
-    return initialBoard;
+    // let initialBoard = [];
+    return Array.from({ length: nrows })
+      .map(r => Array.from({ length: ncols }))
+      .map(cell => Math.random() < chanceLightStartsOn)
+
+    // return initialBoard;
   }
 
+  /*iterate through the matrix with every. If it finds any true, 
+  it will return false.**/
   function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
+    return board.every(r => r.every(cell => !cell))
   }
 
   function flipCellsAround(coord) {
